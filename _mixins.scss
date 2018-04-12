@@ -1,0 +1,207 @@
+@mixin pseudo-icon($image-url) {
+  &::before {
+    content: '';
+    display: block;
+    background: url($image-url) no-repeat;
+    width: 25px;
+    height: 18px;
+    float: left;
+    margin: 0 6px 0 0;
+    background-size: contain;
+    background-position: center;
+  }
+}
+
+@mixin normal-link($color, $hover-color) {
+  color: $color;
+
+  &:link,
+  &:visited {
+    color: $color;
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: $hover-color;
+  }
+}
+
+@mixin arrow-link($color, $hover-color) {
+  @include normal-link($color, $hover-color);
+
+  &::before {
+    content: '→';
+    display: inline-block;
+    margin: 0 0.5rem 0 0;
+  }
+}
+
+@mixin container() {
+  margin: 0 auto;
+  max-width: 900px;
+  position: relative;
+}
+
+@mixin define-breakpoint($name) {
+  &::after {
+    content: $name;
+    display: none;
+  }
+}
+
+@mixin input-field() {
+  background-repeat: no-repeat;
+  background-color: $white;
+  border-radius: 0;
+  border-bottom: 1px solid $light-gray;
+
+  &:focus {
+    border-bottom: 1px solid $medium-gray;
+    background-color: $white;
+  }
+}
+
+@mixin bottom-line($image-url) {
+  background-image: url($image-url);
+  background-position: bottom;
+  background-size: 6px 3px;
+  background-repeat: repeat-x;
+}
+
+@mixin top-line() {
+  background-image: url($image-url);
+  background-position: top;
+  background-size: 6px 3px;
+  background-repeat: repeat-x;
+}
+
+@mixin gradient() {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, $transparent 60%, $black-alpha-50 100%);
+}
+
+@mixin underlined-text-input() {
+  &[type='text'] {
+    border-radius: 0;
+    border-bottom: 1px solid gray;
+    height: 2rem;
+    padding: 0;
+    margin: auto;
+    background: none;
+  }
+}
+
+@mixin zoom-fx($zoom-factor) {
+  &:hover {
+    transform: scale($zoom-factor);
+  }
+}
+
+@mixin modal-base() {
+  transition: opacity 0.2s ease;
+  position: fixed;
+  z-index: 9998;
+}
+
+@mixin modal-mask() {
+  @include modal-base();
+
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  height: 100vh;
+  background-color: $black-alpha-80;
+  display: table;
+}
+
+@mixin modal-container() {
+  position: relative;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem 0 1.7rem;
+  background-color: $white;
+  border-radius: $tile-radius-large;
+  box-shadow: 0 0 16px $shadow-color;
+  transition: all 0.2s ease;
+
+  @media #{$small-only} {
+    padding: 2rem 0 1rem;
+  }
+}
+
+@mixin button() {
+  height: 35px;
+  font-weight: $font-weight-medium;
+  margin: 0;
+  transition: opacity 0.25s ease-out;
+  padding: 0 1rem 2px;
+  min-width: 100px;
+
+  &:focus,
+  &:disabled,
+  &:hover:disabled {
+    cursor: default;
+  }
+}
+
+@mixin small-button() {
+  height: 27px;
+  margin: 0;
+  transition: opacity 0.25s ease-out;
+  background-color: $light-gray;
+  background-repeat: no-repeat;
+  color: black;
+  font-size: $font-size-s;
+
+  &:focus,
+  &:disabled,
+  &:hover:disabled {
+    cursor: default;
+  }
+
+  &:hover,
+  &:disabled,
+  &:hover:disabled {
+    background-color: $light-gray;
+  }
+
+  &:focus {
+    cursor: default;
+    background-color: $light-gray;
+  }
+}
+
+@mixin loading-button() {
+  @include button();
+
+  &__loader {
+    width: 22px;
+    height: 22px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  &__label {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@mixin upload-button() {
+  @include button();
+  color: $white;
+  font-size: $font-size-m;
+  margin: 40px auto 16px;
+  font-weight: $font-weight-medium;
+  background-color: $light-gray;
+  width: 200px;
+  display: block;
+  border-radius: $radius-small;
+  cursor: pointer;
+}
